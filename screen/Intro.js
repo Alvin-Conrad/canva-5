@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Pressable, ImageBackground } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { useNavigation } from '@react-navigation/native'
-import Tutorial from '../component/Tutorial'
+import Tutorial from './Tutorial'
 const Intro = () => {
   const image = { uri: 'https://i.pinimg.com/564x/59/f7/e3/59f7e3c963993ca2ce195b045fc7657f.jpg' };
   const navigation = useNavigation();

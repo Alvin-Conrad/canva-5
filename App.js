@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //import {Navigate} from './screen/Navigate'
 import Intro from './screen/Intro'
-import Tutorial  from './component/Tutorial'
+import Tutorial  from './screen/Tutorial'
 
 
 const Stack = createNativeStackNavigator();
