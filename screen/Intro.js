@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Pressable, ImageBackground } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { useNavigation } from '@react-navigation/native'
+import Tutorial from '../component/Tutorial'
 const Intro = () => {
   const image = { uri: 'https://i.pinimg.com/564x/59/f7/e3/59f7e3c963993ca2ce195b045fc7657f.jpg' };
   const navigation = useNavigation();
@@ -18,7 +19,7 @@ const Intro = () => {
           <Text style={{width: '70%', fontSize: 20,marginBottom:20}}>Welcome to the Canva Guide App, your personalized tutor for mastering the art of design with Canva. This app is designed especially for beginners, providing step-by-step tutorials to help you navigate Canva with ease.</Text>
      
             {/*BTN*/}
-          <Pressable style={{backgroundColor: 'black',width: 145, padding: 3,position: 'absolute', right: 20,top: 350 }} onPress={() => alert('You Pressed')}>
+          <Pressable style={{backgroundColor: 'black',width: 145, padding: 3,position: 'absolute', right: 20,top: 350 }} onPress={() => navigation.navigate('Tutorial')}>
             <Text style={{color: 'white', fontSize: 24, borderRadius: 50, textAlign: 'center'}}>Let's Start</Text>
           </Pressable>
         </View>
