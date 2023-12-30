@@ -1,9 +1,14 @@
 import React from 'react'
 import { View, Text, Pressable, ImageBackground } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
+import { useNavigation } from '@react-navigation/native'
+const Intro = () => {
+  const image = { uri: 'https://i.pinimg.com/564x/59/f7/e3/59f7e3c963993ca2ce195b045fc7657f.jpg' };
+  const navigation = useNavigation();
 
+  return (
+   
 
-const Home = () => {
     <View style={{flex: 1}}>
     {/*BG image*/}
     <ImageBackground source={image} resizeMode="cover" style={{flex: 1, justifyContent: 'center'}}>
@@ -17,8 +22,9 @@ const Home = () => {
             <Text style={{color: 'white', fontSize: 24, borderRadius: 50, textAlign: 'center'}}>Let's Start</Text>
           </Pressable>
         </View>
-    </ImageBackground>
+      </ImageBackground>
     <StatusBar style='auto'/>
-  </View>
+   </View>
+  );
 }
-export default Home
+export default Intro
