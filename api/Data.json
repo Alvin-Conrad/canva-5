@@ -1,0 +1,32 @@
+{
+
+
+    "Tutorial":[{
+        "id":"presentation",
+        "url":"https://youtu.be/C0DPdy98e4c?si=33fa2TXWktINOww2",
+        "Title":"How to create a Powerpoint using Canva"
+    },
+    {
+        "id":"poster",
+        "url":"https://youtu.be/C0DPdy98e4c?si=33fa2TXWktINOww2",
+        "Title":"How to Create a simple Poster using Canva"
+    },
+    {
+        "id":"logo",
+        "url":"https://youtu.be/C0DPdy98e4c?si=33fa2TXWktINOww2",
+        "Title":"How to Create Logo's using Canva"
+
+    },
+    {
+        "id":"flyers",
+        "url":"https://youtu.be/C0DPdy98e4c?si=33fa2TXWktINOww2",
+        "Title":"How to Create flyers using canva"
+    },
+    {
+        "id":"brochures",
+        "url":"https://youtu.be/C0DPdy98e4c?si=33fa2TXWktINOww2",
+        "Title":"How to create Brochures using canva"
+
+    }
+    ]
+}
