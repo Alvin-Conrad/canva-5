@@ -58,7 +58,7 @@ const VideoList = () => {
 
 export default VideoList;
 */
-
+/*
 import React, { useState, useEffect } from 'react';
 import { Text, View, ScrollView, Button } from 'react-native';
 import { Video } from 'react-native-video'; // Import Video from expo-av
@@ -92,5 +92,45 @@ const VideoList = () => {
 };
 
 export default VideoList;
+*/
+import React, { useState, useEffect } from 'react';
+import { Text, View, ScrollView, Button } from 'react-native';
+import  Video  from 'react-native-video';
 
+
+
+const VideoList = () => {
+  const [tutorials, setTutorials] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  useEffect(() => {
+    fetch('https://alvin-conrad.github.io/testapi/data.json')
+      .then((response) => response.json())
+      .then((data) => setTutorials(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
+  return (
+    <ScrollView>
+      {tutorials.map((video) => (
+        <View key={video.key} style={{ marginBottom: 10 }}>
+          <Text>{video.type}</Text>
+          <Text>{video.Title}</Text>
+          <Button title="Play Video" onPress={() => setSelectedVideo(video)} />
+          {selectedVideo === video && (
+             <Video
+             source={{ uri: video.url }}
+             style={{ width: '100%', height: 200 }}
+             controls={true}
+           />
+           
+          
+          )}
+        </View>
+      ))}
+    </ScrollView>
+  );
+};
+
+export default VideoList;
 

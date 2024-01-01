@@ -2,6 +2,7 @@
 import React from 'react'
 import { Feather } from '@expo/vector-icons';
 import { Pressable, Text, View } from 'react-native';
+import VideoList from './component/VideoList';
 
 
 
@@ -30,7 +31,7 @@ const Tutorial = () => {
         <View style={{height: 1,width: '100%',backgroundColor: '#737373',position: 'relative', top: 30 }}/>
         
      </View>
-      {/*Main Tutorial*/}
+      <VideoList/>
      <View>
 
      </View>      
