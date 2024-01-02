@@ -164,13 +164,21 @@ import { Video } from 'expo-av';
 import { ResizeMode } from 'expo-av';
 
 
-
-
 const VideoList = () => {
   const [tutorials, setTutorials] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [status, setStatus] = useState({});
   const Tut = React.useRef({})
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState('white');
+  
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    console.log(`Dark mode is ${isDarkMode ? 'enabled' : 'disabled'}`);
+    setBackgroundColor(isDarkMode ? 'white' : 'black');
+
+  };
 
   useEffect(() => {
     fetch('https://alvin-conrad.github.io/testapi/data.json')
@@ -183,19 +191,15 @@ const VideoList = () => {
     <ScrollView>
       {tutorials.map((video) => (
         <View key={video.key} style={{ marginBottom: 10 }}>
-           <Text>{video.Title}</Text>
-            <Text>{video.type}</Text>
-         
+           <Text style={{color: isDarkMode ? 'white' : 'black'}}>{video.Title}</Text>
+           <Text style={{color: isDarkMode ? 'white' : 'black'}}>{video.type}</Text>
 
-         
             <Video
             ref={Tut}
             source={require('./Test.mp4')}
             useNativeControls
             resizeMode={ResizeMode.CONTAIN}
             style={{ width: '100%', height: 200 }}
-           
-            
             />
           
           

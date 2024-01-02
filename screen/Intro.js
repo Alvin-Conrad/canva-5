@@ -3,7 +3,8 @@ import { View, Text, Pressable, ImageBackground } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import { useNavigation } from '@react-navigation/native'
 import Tutorial from './Tutorial'
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
+
 
 
 const Intro = () => {
