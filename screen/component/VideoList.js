@@ -93,15 +93,81 @@ const VideoList = () => {
 
 export default VideoList;
 */
+/*
 import React, { useState, useEffect } from 'react';
-import { Text, View, ScrollView, Button } from 'react-native';
+import { Text, View, ScrollView, Button , Sty} from 'react-native';
 import  {Video}  from 'expo-av';
+import { ResizeMode } from 'expo-av';
+import { StatusBar } from 'expo-status-bar';
+import { createRef } from 'react';
 
 
 
 const VideoList = () => {
   const [tutorials, setTutorials] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const video = React.useRef(null);
+
+
+  useEffect(() => {
+    fetch('https://alvin-conrad.github.io/testapi/data.json')
+      .then((response) => response.json())
+      .then((data) => setTutorials(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+  const [status, setStatus] = React.useState({});
+
+  return (
+    <ScrollView>
+      {tutorials.map((video) => (
+        <View key={video.key} style={{ marginBottom: 10 }}>
+          <Text>{video.type}</Text>
+          <Text>{video.Title}</Text>
+          <Button title="Play Video" onPress={() => setSelectedVideo(video)} />
+          {selectedVideo === video && (
+          <Video
+             source={{ uri: video.url}}
+             style={{ width: '100%', height: 200 }}
+             controls={true}
+           />
+           
+          <Video
+           useRef={{uri : video.url}}
+            
+          
+           style={{ width: '100%', height: 200 }}
+           source={{
+             uri: video.url
+           }}
+           useNativeControls
+           resizeMode={ResizeMode.CONTAIN}
+           isLooping
+           onPlaybackStatusUpdate={status => setStatus(() => status)}
+         />
+           
+          
+          )}
+        </View>
+      ))}
+    </ScrollView>
+  );
+ 
+  
+};
+
+export default VideoList;
+*/
+
+import React, { useState, useEffect } from 'react';
+import { Text, View, ScrollView, Button } from 'react-native';
+import { Video } from 'expo-av';
+import { ResizeMode } from 'expo-av';
+
+const VideoList = () => {
+  const [tutorials, setTutorials] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [status, setStatus] = useState({});
+  const Tut = React.useRef({})
 
   useEffect(() => {
     fetch('https://alvin-conrad.github.io/testapi/data.json')
@@ -114,18 +180,24 @@ const VideoList = () => {
     <ScrollView>
       {tutorials.map((video) => (
         <View key={video.key} style={{ marginBottom: 10 }}>
-          <Text>{video.type}</Text>
-          <Text>{video.Title}</Text>
-          <Button title="Play Video" onPress={() => setSelectedVideo(video)} />
-          {selectedVideo === video && (
-             <Video
-             source={{ uri: video.url }}
-             style={{ width: '100%', height: 200 }}
-             controls={true}
-           />
+           <Text>{video.Title}</Text>
+            <Text>{video.type}</Text>
+         
+
+         
+            <Video
+            ref={Tut}
+
+            source={{ uri: video.url}}
+            useNativeControls
+            resizeMode={ResizeMode.CONTAIN}
+            style={{ width: '100%', height: 200 }}
            
+            
+            />
           
-          )}
+          
+          
         </View>
       ))}
     </ScrollView>
@@ -133,4 +205,3 @@ const VideoList = () => {
 };
 
 export default VideoList;
-

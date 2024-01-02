@@ -1,14 +1,14 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Feather } from '@expo/vector-icons';
 import { Pressable, Text, View , TextInput} from 'react-native';
 import VideoList from './component/VideoList';
 import { Foundation } from '@expo/vector-icons';
-import { StatusBar } from 'expo-status-bar';
+import { Video } from 'expo-av';
 
 
 
-const Tutorial = () =>{
+const Tutorial = () => {
   return (
     <View style={{ flex: 1 }}>
       {/* Header */}
@@ -21,10 +21,15 @@ const Tutorial = () =>{
             <Feather name="moon" size={24} color="black" />
           </Pressable>
         </View>
+
         {/* Vertical Line */}
         <View style={{ height: 1, width: '100%', backgroundColor: '#737373', marginTop: 30 }} />
-        {/* Content Container */}
-        <View style={{ flex: 1, alignItems: 'center', flexDirection: 'column' }}>
+
+       
+        
+      </View>
+       {/* Content Container */}
+       <View style={{ flex: 1, alignItems: 'center', flexDirection: 'column' }}>
           {/* Search Bar View */}
           <View style={{ padding: 20, flexDirection: 'row', justifyContent: 'space-between' }}>
             <TextInput
@@ -37,15 +42,18 @@ const Tutorial = () =>{
               <Text><Foundation name="magnifying-glass" size={20} color="white" /></Text>
             </Pressable>
           </View>
+          {/*VideoList COntainer*/}
+          <View>
+            <VideoList/>
+          </View>
         </View>
-        <VideoList />
-      </View>
-      <StatusBar style='auto'/>
+
+
     </View>
   );
   
 }
-
+ 
   
 
 
