@@ -2,9 +2,9 @@
 import React, { useState } from 'react'
 import { Feather } from '@expo/vector-icons';
 import { Pressable, Text, View , TextInput} from 'react-native';
-import VideoList from './component/VideoList';
+import VideoList from '../assets/Videos/VideoList';
 import { Foundation } from '@expo/vector-icons';
-import { Video } from 'expo-av';
+
 
 
 
