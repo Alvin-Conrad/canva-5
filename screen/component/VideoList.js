@@ -95,7 +95,7 @@ export default VideoList;
 */
 import React, { useState, useEffect } from 'react';
 import { Text, View, ScrollView, Button } from 'react-native';
-import  Video  from 'react-native-video';
+import  {Video}  from 'expo-av';
 
 
 

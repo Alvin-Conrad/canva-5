@@ -3,6 +3,8 @@ import React from 'react'
 import { Feather } from '@expo/vector-icons';
 import { Pressable, Text, View , TextInput} from 'react-native';
 import VideoList from './component/VideoList';
+import { Foundation } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 
 
 
@@ -38,11 +40,12 @@ const Tutorial = () =>{
         </View>
         <VideoList />
       </View>
+      <StatusBar style='auto'/>
     </View>
   );
   
 }
- 
+
   
 
 
