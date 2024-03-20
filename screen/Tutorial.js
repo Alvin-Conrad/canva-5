@@ -1,14 +1,29 @@
 
-import React, { useState } from 'react'
-import { Pressable, Text, View , TextInput} from 'react-native';
-import VideoList from '../assets/Videos/VideoList';
+import React, { useState, useRef, useEffect } from 'react'
+import { Pressable, Text, View , TextInput, ScrollView} from 'react-native';
+import { Video,} from 'expo-av';
 import { Foundation } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { ResizeMode } from 'expo-av';
+
+
+
+
+ 
 
 
 const Tutorial = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState('white');
+  const [tutorials, setTutorials] = useState([]);
+  const Tut = useRef([]);
+
+  useEffect(() => {
+    fetch('https://alvin-conrad.github.io/testapi/data.json')
+      .then((response) => response.json())
+      .then((data) => setTutorials(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
   
 
   const toggleDarkMode = () => {
@@ -53,13 +68,31 @@ const Tutorial = () => {
               } // Add onChangeText
             />
             {/* Search Button */}
-            <Pressable style={{ marginLeft: 10, backgroundColor: '#8cb2ff', height: 30 }} onPress={() => alert('Search BTN clicked')}>
-              <Text><Foundation name="magnifying-glass" size={20} color="white" /></Text>
+            <Pressable style={{ marginLeft: 10,height: 30, }} onPress={() => alert('Search BTN clicked')}>
+              <Text><Foundation name="magnifying-glass" size={20} color={ isDarkMode ? "white": "black"} /></Text>
             </Pressable>
           </View>
           {/*VideoList COntainer*/}
           <View>
-            <VideoList style={{ color: isDarkMode ? 'white' : 'black'}}/>
+          <ScrollView>
+              {tutorials.map((video) => (
+                <View key={video.key} style={{ marginBottom: 10 }}>
+                  <Text style={{color: isDarkMode ? 'white' : 'black'}}>{video.Title}</Text>
+                  <Text style={{color: isDarkMode ? 'white' : 'black'}}>{video.type}</Text>
+
+                    <Video
+                    ref={Tut}
+                    source={require('../assets/Videos/Test.mp4')}
+                    useNativeControls
+                    resizeMode={ResizeMode.CONTAIN}
+                    style={{ width: '100%', height: 200 }}
+                    />
+                  
+                  
+                  
+                </View>
+              ))}
+          </ScrollView>
           </View>
         </View>
        
