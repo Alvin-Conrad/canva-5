@@ -94,13 +94,24 @@ const Tutorial = () => {
          
         </View>
 
-        {/* Button for Next Page */}
+        {/* Page Navigation */}
         <View>
-          <Pressable style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10}}
-          onPress={() => navigation.navigate("Page2")}>
-            <Text style={{ color: isDarkMode ? 'white' : 'black', fontSize: 20}}>Next</Text>
-            <AntDesign name='doubleright' color={isDarkMode ? 'white' : 'black'} size={30}/>
-          </Pressable>
+          {/* Numbers  */}
+          <View style={{display: 'flex', flexDirection: 'row', gap: 20}}>
+            <Pressable style={{ backgroundColor: isDarkMode ? "white" : "#141414", }}
+            onPress={() => navigation.navigate("Tutorial")}>
+              <Text style={{color: isDarkMode ? 'black' : 'white', fontSize: 30, paddingLeft: 5, paddingRight: 5}}>1</Text>
+            </Pressable>
+            <Pressable onPress={() => navigation.navigate("Page2")}>
+              <Text style={{color: isDarkMode ? 'white' : 'black', fontSize: 30}}>2</Text>
+            </Pressable>
+            <Pressable onPress={() => navigation.navigate("Page3")}>
+              <Text style={{color: isDarkMode ? 'white' : 'black', fontSize: 30}}>3</Text>
+            </Pressable>
+            <Pressable onPress={() => navigation.navigate("Page4")}>
+              <Text style={{color: isDarkMode ? 'white' : 'black', fontSize: 30}}>4</Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>

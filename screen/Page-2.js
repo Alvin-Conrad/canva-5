@@ -5,7 +5,7 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import { useNavigation } from '@react-navigation/native';
 
 
-const NextPageVideos = () => {
+const Page2 = () => {
   // navigation
   const navigation = useNavigation();
 
@@ -31,8 +31,8 @@ const NextPageVideos = () => {
   // data
   const videos = [
       { title: 'How to Find Help', id: 'K13aR-zx3LI' },
-        { title: 'How to Create Folders', id: 'v8rd-q7kZs' },
-        { title: 'How to Design Together', id: 'hyaMhBqGT9Q' },
+        { title: 'How to Create Folders', id: 'cv8rd-q7kZs' },
+        { title: 'How to share and collaborate on designs', id: 'hyaMhBqGT9Q' },
     // Add more videos as needed
   ];
 
@@ -45,7 +45,7 @@ const NextPageVideos = () => {
        <View style={{marginBottom: 30}}>
          <ScrollView showsVerticalScrollIndicator={false}>
          {videos.map((video) => (
-             <View key={video.id} style={{ alignItems: 'center', marginBottom: 20 }}>
+             <View key={video.id} style={{ alignItems: 'center', marginBottom: 20 , paddingTop: 30}}>
                <YoutubePlayer
                  play={playingVideos[video.id]}
                  videoId={video.id}
@@ -53,6 +53,7 @@ const NextPageVideos = () => {
                  style={{ height: 200 }}
                  width={300}
                  controls={false}
+                 forceAndroidAutoplay={false}
                />
                <View style={{ alignItems: 'center' }}>
                  <Text style={{ color: isDarkMode ? 'white' : 'black', fontSize: 25, marginBottom: 10 }}>
@@ -79,13 +80,25 @@ const NextPageVideos = () => {
              </View>
            ))}
            <View>
-         <Pressable style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10}}
-         onPress={() => navigation.navigate("Page2")}>
-           <Text style={{ color: isDarkMode ? 'white' : 'black', fontSize: 20}}>Next</Text>
-           <AntDesign name='doubleright' color={isDarkMode ? 'white' : 'black'} size={30}/>
-         </Pressable>
        </View>
          </ScrollView>
+         <View style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          {/* Numbers  */}
+          <View style={{display: 'flex', flexDirection: 'row', gap: 20,}}>
+            <Pressable onPress={() => navigation.navigate("Tutorial")}>
+              <Text style={{color:'black',  fontSize: 30,}}>1</Text>
+            </Pressable>
+            <Pressable onPress={() => navigation.navigate("Page2")} style={{backgroundColor: isDarkMode ? "white" : "#141414"}}>
+              <Text style={{color: "white", fontSize: 30, paddingLeft: 5, paddingRight: 5}}>2</Text>
+            </Pressable>
+            <Pressable onPress={() => navigation.navigate("Page3")}>
+              <Text style={{color: "black", fontSize: 30}}>3</Text>
+            </Pressable>
+            <Pressable onPress={() => navigation.navigate("Page4")}>
+              <Text style={{color: "black", fontSize: 30}}>4</Text>
+            </Pressable>
+          </View>
+        </View>
        </View>
 
        {/* Button for Next Page */}
@@ -96,4 +109,4 @@ const NextPageVideos = () => {
   );
 };
 
-export default NextPageVideos;
+export default Page2;
