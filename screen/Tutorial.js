@@ -1,109 +1,110 @@
-
-import React, { useState, useRef, useEffect } from 'react'
-import { Pressable, Text, View , TextInput, ScrollView} from 'react-native';
-import { Video,} from 'expo-av';
-import { Foundation } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import { ResizeMode } from 'expo-av';
-
-
-
-
- 
-
+import React, { useState } from 'react';
+import { Pressable, Text, View,} from 'react-native';
+import { Feather, AntDesign } from '@expo/vector-icons';
+import YoutubePlayer from 'react-native-youtube-iframe';
+import { useNavigation } from '@react-navigation/native';
 
 const Tutorial = () => {
+  // navigation
+  const navigation = useNavigation();
+
+  // dark mode state
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState('white');
-  const [tutorials, setTutorials] = useState([]);
-  const Tut = useRef([]);
 
-  useEffect(() => {
-    fetch('https://alvin-conrad.github.io/testapi/data.json')
-      .then((response) => response.json())
-      .then((data) => setTutorials(data))
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
-  
+  // state to track play state for each video
+  const [playingVideos, setPlayingVideos] = useState({});
 
+  // function to toggle dark mode
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-    console.log(`Dark mode is ${isDarkMode ? 'enabled' : 'disabled'}`);
-    setBackgroundColor(isDarkMode ? 'white' : 'black');
-
   };
- 
+
+  // function to toggle play state for a video
+  const togglePlay = (videoId) => {
+    setPlayingVideos((prevState) => ({
+      ...prevState,
+      [videoId]: !prevState[videoId],
+    }));
+  };
+
+  // data
+  const videos = [
+    { title: 'Welcome to Canva', id: 'SGmmiq70uk4' },
+    { title: 'How to Use Canva', id: 'V9LtRF6EbyY' },
+    // Add more videos as needed
+  ];
+
   return (
-    <View style={{ flex: 1 ,  backgroundColor: isDarkMode ? 'black' : 'white'}}>
+    <View style={{ flex: 1, backgroundColor: isDarkMode ? '#141414' : 'white' }}>
       {/* Header */}
-      <View style={{ width: '100%', height: 150, justifyContent: 'center', alignItems: 'center',}}>
+      <View style={{ width: '100%', height: 150, justifyContent: 'center', alignItems: 'center', position: 'relative', top: 20 }}>
         {/* Navbar Container */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 20 }}>
-          <Text style={{ fontSize: 30,  color: isDarkMode ? 'white' : 'black'  }}><Text style={{ color: '#8cb2ff' }}>CANVA</Text> GUIDE APP</Text>
-          
-          <Pressable
-            onPress={toggleDarkMode}
-            style={({ pressed }) => ({
-            padding: 10,
-            })}>
-      
-            <Feather name={isDarkMode ? 'moon' : 'sun'} size={24} color={isDarkMode ? 'white' : 'black'}/>
-      
+          <Text style={{ fontSize: 30, color: isDarkMode ? 'white' : 'black' }}>
+            <Text style={{ color: '#8cb2ff' }}>CANVA</Text> GUIDE APP
+          </Text>
+
+          <Pressable onPress={toggleDarkMode} style={{ position: 'relative', left: 30 }}>
+            <Feather name={isDarkMode ? 'moon' : 'sun'} size={30} color={isDarkMode ? 'white' : 'black'} />
           </Pressable>
         </View>
         {/* Vertical Line */}
         <View style={{ height: 1, width: '100%', backgroundColor: '#737373', marginTop: 30 }} />
-
-       
-        
       </View>
-       {/* Content Container */}
-       <View style={{ flex: 1, alignItems: 'center', flexDirection: 'column' }}>
-          {/* Search Bar View */}
-          <View style={{ padding: 20, flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TextInput
-              style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, paddingHorizontal: 10, width: 270, borderRadius: 20,  color: isDarkMode ? 'white' : 'black'}}
-              autoComplete='off'
-              onChangeText={(text) => console.log(text)
-              } // Add onChangeText
-            />
-            {/* Search Button */}
-            <Pressable style={{ marginLeft: 10,height: 30, }} onPress={() => alert('Search BTN clicked')}>
-              <Text><Foundation name="magnifying-glass" size={20} color={ isDarkMode ? "white": "black"} /></Text>
-            </Pressable>
-          </View>
-          {/*VideoList COntainer*/}
-          <View>
-          <ScrollView>
-              {tutorials.map((video) => (
-                <View key={video.key} style={{ marginBottom: 10 }}>
-                  <Text style={{color: isDarkMode ? 'white' : 'black'}}>{video.Title}</Text>
-                  <Text style={{color: isDarkMode ? 'white' : 'black'}}>{video.type}</Text>
 
-                    <Video
-                    ref={Tut}
-                    source={require('../assets/Videos/Test.mp4')}
-                    useNativeControls
-                    resizeMode={ResizeMode.CONTAIN}
-                    style={{ width: '100%', height: 200 }}
+      {/* Content Container */}
+      <View style={{ flex: 1, alignItems: 'center', flexDirection: 'column' }}>
+        {/* VideoList Container */}
+        <View style={{marginBottom: 30}}>
+          
+            {videos.map((video) => (
+              <View key={video.id} style={{ alignItems: 'center', marginBottom: 20 }}>
+                <YoutubePlayer
+                  play={playingVideos[video.id]}
+                  videoId={video.id}
+                  height={200}
+                  style={{ height: 200 }}
+                  width={300}
+                  controls={false}
+                />
+                <View style={{ alignItems: 'center' }}>
+                  <Text style={{ color: isDarkMode ? 'white' : 'black', fontSize: 25, marginBottom: 10 }}>
+                    {video.title}
+                  </Text>
+                  <Pressable
+                    onPress={() => togglePlay(video.id)}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      borderColor: isDarkMode ? 'white' : '#171717',
+                      borderWidth: 1,
+                      padding: 10,
+                    }}
+                  >
+                    <Feather
+                      name={playingVideos[video.id] ? 'pause' : 'play'}
+                      size={17}
+                      style={{ color: isDarkMode ? 'white' : 'black' }}
                     />
-                  
-                  
-                  
+                  </Pressable>
                 </View>
-              ))}
-          </ScrollView>
-          </View>
+              </View>
+            ))}
+         
         </View>
-       
 
+        {/* Button for Next Page */}
+        <View>
+          <Pressable style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10}}
+          onPress={() => navigation.navigate("Page2")}>
+            <Text style={{ color: isDarkMode ? 'white' : 'black', fontSize: 20}}>Next</Text>
+            <AntDesign name='doubleright' color={isDarkMode ? 'white' : 'black'} size={30}/>
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
-  
-}
- 
-  
+};
 
-
-
-export default Tutorial
+export default Tutorial;
